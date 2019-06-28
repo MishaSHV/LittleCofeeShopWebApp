@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.705
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleCofeeShopWebApp", "LittleCofeeShopWebApp\LittleCofeeShopWebApp.csproj", "{6F860844-6B79-4C4A-B4DD-6A6035674079}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleCofeeShopWebApp.WebUI", "LittleCofeeShopWebApp\LittleCofeeShopWebApp.WebUI.csproj", "{6F860844-6B79-4C4A-B4DD-6A6035674079}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
