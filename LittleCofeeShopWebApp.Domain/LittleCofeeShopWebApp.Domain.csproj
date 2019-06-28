@@ -41,7 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\ICofeeRepository.cs" />
+    <Compile Include="Concrete\CofeeShopDbInitializer.cs" />
+    <Compile Include="Concrete\EFCofeeRepository.cs" />
+    <Compile Include="Concrete\LittleCofeeShopDbContext.cs" />
+    <Compile Include="Entities\CofeeShopDbInitializer.cs" />
+    <Compile Include="Entities\EFCofeeRepository.cs" />
+    <Compile Include="Entities\LittleCofeeShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
