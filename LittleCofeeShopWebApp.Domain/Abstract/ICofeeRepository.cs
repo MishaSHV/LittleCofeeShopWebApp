@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LittleCofeeShopWebApp.Domain.Entities;
+using System;
 using System.Collections.Generic;
 
 

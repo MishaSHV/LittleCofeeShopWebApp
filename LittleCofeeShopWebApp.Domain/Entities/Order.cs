@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using Newtonsoft.Json;
 
-namespace WebCafeeShopTest.Domain.Entities
+namespace LittleCofeeShopWebApp.Domain.Entities
 {
     public class Order
     {

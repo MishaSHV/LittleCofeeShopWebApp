@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace WebCafeeShopTest.Domain.Entities
+namespace LittleCofeeShopWebApp.Domain.Entities
 {
     public class User
     {
