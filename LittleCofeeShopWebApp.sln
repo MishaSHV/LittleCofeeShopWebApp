@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleCofeeShopWebApp.WebUI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleCofeeShopWebApp.Domain", "LittleCofeeShopWebApp.Domain\LittleCofeeShopWebApp.Domain.csproj", "{55AA26A1-BA99-443D-8619-02FA434ADA2D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LittleCofeeShopWebApp.Test", "LittleCofeeShopWebApp.Test\LittleCofeeShopWebApp.Test.csproj", "{745C348A-1647-488A-B7D7-5BC48D7CDA5D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{55AA26A1-BA99-443D-8619-02FA434ADA2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55AA26A1-BA99-443D-8619-02FA434ADA2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55AA26A1-BA99-443D-8619-02FA434ADA2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{745C348A-1647-488A-B7D7-5BC48D7CDA5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{745C348A-1647-488A-B7D7-5BC48D7CDA5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{745C348A-1647-488A-B7D7-5BC48D7CDA5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{745C348A-1647-488A-B7D7-5BC48D7CDA5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
