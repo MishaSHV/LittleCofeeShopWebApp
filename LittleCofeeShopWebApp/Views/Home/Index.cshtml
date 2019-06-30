@@ -58,18 +58,52 @@
         <div class="row">
             @foreach (var cofee in Model)
             {
-                <div class="col-md-12">
-                    <h2>@cofee.Name</h2>
-                    <div class=" col-md-3">
-                        <img src="@System.Web.VirtualPathUtility.ToAbsolute(cofee.ImagePath)" title="@cofee.Name" />
-                    </div>
-                    <div class="col-md-9">
-                        <p>
-                            @cofee.Description
-                        </p>
-                        <p><a href="#" class="btn btn-default">See more &raquo;</a></p>
-                    </div>
+            <div class="col-md-12">
+                <h2>@cofee.Name</h2>
+                <div class=" col-md-3">
+                    <img src="@System.Web.VirtualPathUtility.ToAbsolute(cofee.ImagePath)" title="@cofee.Name" />
                 </div>
+                <div class="col-md-9">
+                    <p>
+                        @cofee.Description
+                    </p>
+                    <div class="col-md-3">
+                        <table class="table table-striped">
+                            <thead>
+                                Volumes
+                            </thead>
+                            @foreach (var volumeOption in cofee.VolumeOptions)
+                            {
+                            <tr>
+                                <td>
+                                    @volumeOption.Size
+                                </td>
+                                <td>
+                                    @volumeOption.Unit.ShortName
+                                </td>
+                            </tr>
+                            }
+                        </table>
+                    </div>
+
+                    @if (cofee.MilkOptions.Count != 0)
+                    {
+                        <div class="col-md-3">
+                            <p class="bg-info">Milk</p>
+                        </div>
+                    }
+                    @if (cofee.SugarOptions.Count != 0)
+                    {
+                        <div class="col-md-3">
+                            <p class="bg-info">Sugar</p>
+                        </div>
+                    }
+                    
+                </div>
+                <div class="col-md-3 col-md-push-3">
+                    <p><a href="#" class="btn btn-default">See more &raquo;</a></p>
+                </div>
+            </div>
             }
             </div>
         <hr />
