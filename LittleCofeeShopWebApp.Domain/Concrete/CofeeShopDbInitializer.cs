@@ -54,7 +54,8 @@ namespace LittleCofeeShopWebApp.Domain.Concrete
                         has a higher concentration of suspended and dissolved solids, and has crema on top(a foam with a creamy consistency).",
                 VolumeOptions = new List<VolumeOption>(defaultVolumeOptions),
                 SugarOptions = new List<SugarOption>(sugarOptions),
-                PriceCoeff = 3.0M
+                PriceCoeff = 3.0M,
+                ImagePath = "~/Static/Espresso.jpg"
             };
             context.CofeeRecords.AddOrUpdate(espressoCofee);
 
@@ -66,7 +67,8 @@ namespace LittleCofeeShopWebApp.Domain.Concrete
                 MilkOptions = new List<MilkOption>(milkOptions),
                 VolumeOptions = new List<VolumeOption>(latteVolumeOptions),
                 SugarOptions = new List<SugarOption>(sugarOptions),
-                PriceCoeff = 4.0M
+                PriceCoeff = 4.0M,
+                ImagePath = "~/Static/Latte.jpg"
             };
             context.CofeeRecords.AddOrUpdate(latteCofee);
 
@@ -78,7 +80,8 @@ namespace LittleCofeeShopWebApp.Domain.Concrete
                                 of shots of espresso and the amount of water added.",
                 VolumeOptions = new List<VolumeOption>(defaultVolumeOptions),
                 SugarOptions = new List<SugarOption>(sugarOptions),
-                PriceCoeff = 3.0M
+                PriceCoeff = 3.0M,
+                ImagePath = "~/Static/Americano.jpg"
             };
             context.CofeeRecords.AddOrUpdate(americanoCofee);
 
