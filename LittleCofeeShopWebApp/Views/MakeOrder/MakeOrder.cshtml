@@ -1,5 +1,6 @@
-﻿@model int
-<div id="myModal" class="modal fade" role="dialog">
+﻿@using LittleCofeeShopWebApp.Domain.Entities
+@model Cofee
+<div id=@($"{Model.Name}{Model.CofeeId}") class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -9,12 +10,14 @@
             </div>
             <div class="modal-body">
                 <form class="form-group">
-                    <p>Capucino</p>
+                    <p>@Model.Name</p>
                     <p>
                         Select volume size:
                         <select class="form-control">
-                            <option>0.135 L</option>
-                            <option>0.250 L</option>
+                            @foreach (var volumeOption in Model.VolumeOptions)
+                            {
+                                <option>@($"{volumeOption.Size} {volumeOption.Unit.ShortName}")</option>
+                            }
                         </select>
                     </p>
                     <br />
@@ -33,20 +36,25 @@
                         </span>
                     </div>
                     <br />
-                    <div>
-                        <input type="checkbox" id="milk" name="milk"
-                               checked>
-                        <label for="milk">Milk</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="sugar" name="sugar"
-                               checked>
-                        <label for="sugar">Sugar</label>
-                    </div>
+                    @if (Model.MilkOptions.Count != 0)
+                    {
+                        <div>
+                            <input type="checkbox" id="milk" name="milk"
+                                   checked>
+                            <label for="milk">Milk</label>
+                        </div>
+                    }
+                    @if (Model.SugarOptions.Count != 0)
+                    {
+                        <div>
+                            <input type="checkbox" id="sugar" name="sugar"
+                                   checked>
+                            <label for="sugar">Sugar</label>
+                        </div>
+                    }
                     <input type="submit" class="btn btn-success" value="Go to cart" />
                     <button type="button" class="btn btn-default " data-dismiss="modal">Go back</button>
                 </form>
-                <b>@Model</b>
             </div>
         </div>
 

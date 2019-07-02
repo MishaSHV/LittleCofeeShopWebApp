@@ -89,14 +89,11 @@
 
                 </div>
                 <div class="col-md-3 col-md-push-3">
-                    <p>@Html.ActionLink("Order »", "MakeOrder", "MakeOrder", new { CofeeId = cofee.CofeeId }, new { @class = "btn btn-primary" })</p>
+                    @Html.Action("MakeOrder", "MakeOrder", new { Cofee = cofee })
+                    <p><a class="btn btn-primary" data-toggle="modal" data-target=@($"#{cofee.Name}{cofee.CofeeId}")>Order »</a></p>
                 </div>
             </div>
         }
-    </div>
-    <div class="text-center">
-        @Html.Action("MakeOrder", "MakeOrder", new {CofeeId = 1 })
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
     </div>
     <hr />
     <footer>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using LittleCofeeShopWebApp.Domain.Entities;
 
 namespace LittleCofeeShopWebApp.Controllers
 {
@@ -14,9 +15,10 @@ namespace LittleCofeeShopWebApp.Controllers
             return View();
         }
         */
-        public PartialViewResult MakeOrder(int cofeeId)
+        public PartialViewResult MakeOrder(Cofee cofee)
         {
-            return PartialView(cofeeId);
+            
+            return PartialView(cofee);
         }
     }
 }
