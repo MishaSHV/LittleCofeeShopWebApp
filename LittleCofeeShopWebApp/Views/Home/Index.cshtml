@@ -58,6 +58,20 @@
                             <thead>
                                 Volumes
                             </thead>
+                            <tr>
+                                <th>
+                                    Volume
+                                </th>
+                                <th>
+                                    Unit
+                                </th>
+                                <th>
+                                    Price
+                                </th>
+                                <th>
+                                    Cupcap
+                                </th>
+                            </tr>
                             @foreach (var volumeOption in cofee.VolumeOptions)
                             {
                                 <tr>
@@ -66,6 +80,15 @@
                                     </td>
                                     <td>
                                         @volumeOption.Unit.ShortName
+                                    </td>
+                                    <td>
+                                        @((cofee.PriceCoeff * volumeOption.Size).ToString("F2"))$
+                                    </td>
+                                    <td>
+                                        @if (volumeOption.IsCupCap)
+                                        {
+                                            @:avaible
+                                        }
                                     </td>
                                 </tr>
                             }
