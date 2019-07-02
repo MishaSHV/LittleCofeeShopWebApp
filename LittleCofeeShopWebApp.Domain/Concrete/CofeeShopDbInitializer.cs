@@ -31,9 +31,9 @@ namespace LittleCofeeShopWebApp.Domain.Concrete
 
             defaultVolumeOptions.Add(new VolumeOption { Unit = litreUnit, Size = 0.133M, Name = "Small", IsCupCap = true });
             defaultVolumeOptions.Add(new VolumeOption { Unit = litreUnit, Size = 0.250M, Name = "Middle", IsCupCap = true });
-            IList<VolumeOption> americanoVolumeOptions = new List<VolumeOption>(defaultVolumeOptions);
-            americanoVolumeOptions.Add(new VolumeOption { Unit = litreUnit, Size = 0.500M, Name = "Large", IsCupCap = true });
-            context.VolumeOptionRecords.AddRange(americanoVolumeOptions);
+            IList<VolumeOption> latteVolumeOptions = new List<VolumeOption>(defaultVolumeOptions);
+            latteVolumeOptions.Add(new VolumeOption { Unit = litreUnit, Size = 0.500M, Name = "Large", IsCupCap = true });
+            context.VolumeOptionRecords.AddRange(latteVolumeOptions);
 
             IList<MilkOption> milkOptions = new List<MilkOption>();
             milkOptions.Add(new MilkOption { Unit = notDefUnit, Price = 0.1M, Size = 1.0M });
@@ -49,31 +49,39 @@ namespace LittleCofeeShopWebApp.Domain.Concrete
             Cofee espressoCofee = new Cofee
             {
                 Name = "Espresso",
-                Description = "Good cofee",
+                Description = @"Espresso is coffee of Italian origin, brewed by expressing or forcing a small amount of nearly boiling water under
+                        pressure through finely ground coffee beans.Espresso is generally thicker than coffee brewed by other methods,
+                        has a higher concentration of suspended and dissolved solids, and has crema on top(a foam with a creamy consistency).",
                 VolumeOptions = new List<VolumeOption>(defaultVolumeOptions),
                 SugarOptions = new List<SugarOption>(sugarOptions),
-                PriceCoeff = 3.0M
+                PriceCoeff = 3.0M,
+                ImagePath = "~/Static/Espresso.jpg"
             };
             context.CofeeRecords.AddOrUpdate(espressoCofee);
 
             Cofee latteCofee = new Cofee
             {
                 Name = "Latte",
-                Description = "Very good cofee",
-                VolumeOptions = new List<VolumeOption>(defaultVolumeOptions),
+                Description = @"A latte is a coffee drink made with espresso and steamed milk. A cafe latte consists of 2 fluid ounces of espresso,
+                                3 ounces of steamed milk, and typically a thin layer of foam on top.It can sometimes be referred to as a “Wet Cappuccino”.",
+                MilkOptions = new List<MilkOption>(milkOptions),
+                VolumeOptions = new List<VolumeOption>(latteVolumeOptions),
                 SugarOptions = new List<SugarOption>(sugarOptions),
-                PriceCoeff = 4.0M
+                PriceCoeff = 4.0M,
+                ImagePath = "~/Static/Latte.jpg"
             };
             context.CofeeRecords.AddOrUpdate(latteCofee);
 
             Cofee americanoCofee = new Cofee
             {
                 Name = "Americano",
-                Description = "Super cofee",
-                MilkOptions = new List<MilkOption>(milkOptions),
-                VolumeOptions = new List<VolumeOption>(americanoVolumeOptions),
+                Description = @"Caffè Americano, or Americano (Italian: American coffee) is a style of coffee prepared by adding hot water to espresso,
+                                giving a similar strength but different flavor from regular drip coffee. The strength of an Americano varies with the number
+                                of shots of espresso and the amount of water added.",
+                VolumeOptions = new List<VolumeOption>(defaultVolumeOptions),
                 SugarOptions = new List<SugarOption>(sugarOptions),
-                PriceCoeff = 3.0M
+                PriceCoeff = 3.0M,
+                ImagePath = "~/Static/Americano.jpg"
             };
             context.CofeeRecords.AddOrUpdate(americanoCofee);
 

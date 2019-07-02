@@ -17,6 +17,7 @@ namespace LittleCofeeShopWebApp.Domain.Entities
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal PriceCoeff { get; set; }
+        public string ImagePath { get; set; }
 
         public virtual ICollection<VolumeOption> VolumeOptions { get; set; }
         public virtual ICollection<MilkOption> MilkOptions { get; set; }

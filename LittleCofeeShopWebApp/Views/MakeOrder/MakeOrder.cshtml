@@ -1,0 +1,62 @@
+﻿@using LittleCofeeShopWebApp.Domain.Entities
+@model Cofee
+<div id=@($"{Model.Name}{Model.CofeeId}") class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2 class="modal-title">Order adding to the cart</h2>
+            </div>
+            <div class="modal-body">
+                <form class="form-group">
+                    <p>@Model.Name</p>
+                    <p>
+                        Select volume size:
+                        <select class="form-control">
+                            @foreach (var volumeOption in Model.VolumeOptions)
+                            {
+                                <option>@($"{volumeOption.Size} {volumeOption.Unit.ShortName}")</option>
+                            }
+                        </select>
+                    </p>
+                    <br />
+                    Quantity
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+                                <span class="glyphicon glyphicon-minus"></span>
+                            </button>
+                        </span>
+                        <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                        </span>
+                    </div>
+                    <br />
+                    @if (Model.MilkOptions.Count != 0)
+                    {
+                        <div>
+                            <input type="checkbox" id="milk" name="milk"
+                                   checked>
+                            <label for="milk">Milk</label>
+                        </div>
+                    }
+                    @if (Model.SugarOptions.Count != 0)
+                    {
+                        <div>
+                            <input type="checkbox" id="sugar" name="sugar"
+                                   checked>
+                            <label for="sugar">Sugar</label>
+                        </div>
+                    }
+                    <input type="submit" class="btn btn-success" value="Go to cart" />
+                    <button type="button" class="btn btn-default " data-dismiss="modal">Go back</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

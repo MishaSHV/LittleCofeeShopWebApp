@@ -11,7 +11,13 @@ namespace LittleCofeeShopWebApp.Domain.Concrete
 
         public IEnumerable<Cofee> Products
         {
-            get { return context.CofeeRecords.Include("VolumeOptions").Include("MilkOptions").Include("SugarOptions"); }
+            get { return context.CofeeRecords
+                    .Include("VolumeOptions")
+                    .Include("MilkOptions")
+                    .Include("SugarOptions")
+                    .Include("VolumeOptions.Unit")
+                    .Include("MilkOptions.Unit")
+                    .Include("SugarOptions.Unit"); }
         }
 
         public Cofee DeleteProduct(int productID)
