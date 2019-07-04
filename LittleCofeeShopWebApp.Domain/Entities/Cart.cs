@@ -12,16 +12,31 @@ namespace LittleCofeeShopWebApp.Domain.Entities
 
         public void AddItem(Recipe recipe, int quantity)
         {
+            CartLine line = lineCollection
+                .Where(p => p.Recipe == recipe)
+                .FirstOrDefault();
 
+            if (line == null)
+            {
+                lineCollection.Add(new CartLine
+                {
+                    Recipe = recipe,
+                    Quantity = quantity
+                });
+            }
+            else
+            {
+                line.Quantity += quantity;
+            }
         }
-        public void RemoveLine(Recipe product)
+        public void RemoveLine(Recipe recipe)
         {
-
+            lineCollection.RemoveAll(l => l.Recipe == recipe);
         }
 
         public decimal ComputeTotalValue()
         {
-           // return lineCollection.Sum(e => e.Product.Price * e.Quantity);
+            return lineCollection.Sum(e => e.Recipe.Price() * e.Quantity);
         }
 
         public void Clear()
