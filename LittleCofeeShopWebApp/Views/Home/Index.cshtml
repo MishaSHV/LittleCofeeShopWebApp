@@ -93,29 +93,28 @@
                                 </tr>
                             }
                         </table>
+                        <div class=" col-md-3">
+                            @if (cofee.MilkOptions.Count != 0)
+                            {
+                                <p>
+                                    <span class="label label-info">Milk</span>
+                                </p>
+
+                            }
+                            @if (cofee.SugarOptions.Count != 0)
+                            {
+                                <p>
+                                    <span class="label label-info">Sugar</span>
+                                </p>
+                            }
+                        </div>
                     </div>
-
-                    @if (cofee.MilkOptions.Count != 0)
-                    {
-                        <p>
-                            <span class="label label-info">Milk</span>
-                        </p>
-
-
-                    }
-                    @if (cofee.SugarOptions.Count != 0)
-                    {
-                        <p>
-                            <span class="label label-info">Sugar</span>
-                        </p>
-                    }
-
                 </div>
-                <div class="col-md-3 col-md-push-3">
-                    @Html.Action("MakeOrder", "MakeOrder", new { Cofee = cofee })
-                    <p><a class="btn btn-primary" data-toggle="modal" data-target=@($"#{cofee.Name}{cofee.CofeeId}")>Order »</a></p>
-                </div>
-            </div>
+            <div class="col-md-3 col-md-push-3">
+                 @Html.Action("MakeOrder", "MakeOrder", new { Cofee = cofee })
+                      <p><a class="btn btn-primary" data-toggle="modal" data-target=@($"#{cofee.Name}{cofee.CofeeId}")>Order »</a></p>
+             </div>
+          </div>
         }
     </div>
     <hr />
