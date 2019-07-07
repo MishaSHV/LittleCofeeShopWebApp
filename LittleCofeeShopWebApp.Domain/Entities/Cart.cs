@@ -36,7 +36,7 @@ namespace LittleCofeeShopWebApp.Domain.Entities
 
         public decimal ComputeTotalValue()
         {
-            return lineCollection.Sum(e => e.Recipe.Price() * e.Quantity);
+            return lineCollection.Sum(e => e.Recipe.Price * e.Quantity);
         }
 
         public void Clear()

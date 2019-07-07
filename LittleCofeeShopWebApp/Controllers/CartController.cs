@@ -95,6 +95,11 @@ namespace LittleCofeeShopWebApp.Controllers
             return RedirectToAction("Index");
         }
 
+        public ViewResult Index()
+        {
+            return View(GetCart());
+        }
+
         private Cart GetCart()
         {
             Cart cart = (Cart)Session["Cart"];

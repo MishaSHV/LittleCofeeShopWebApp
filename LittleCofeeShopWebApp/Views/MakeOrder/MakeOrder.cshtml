@@ -15,7 +15,7 @@
                     <p>@Model.Name</p>
                     <p>
                         Select volume size:
-                        <select class="form-control" name = "VolumeOptionId">
+                        <select class="form-control" name="VolumeOptionId">
                             @foreach (var volumeOption in Model.VolumeOptions)
                             {
                                 <option value=@($"{volumeOption.VolumeOptionId}")>@($"{volumeOption.Size} {volumeOption.Unit.ShortName}")</option>
@@ -38,20 +38,21 @@
                         </span>
                     </div>
                     <br />
+
                     if (Model.MilkOptions.Count != 0)
                     {
-                    <div>
-                        @Html.CheckBox("isMilkOption", true)
-                        <label for="isMilkOption">Milk</label>
-                    </div>
+                        <div>
+                            @Html.CheckBox("isMilkOption", true)
+                            <label for="isMilkOption">Milk</label>
+                        </div>
                     }
 
                     if (Model.SugarOptions.Count != 0)
                     {
-                    <div>
-                        @Html.CheckBox("isSugarOption", true)
-                        <label for="isSugarOption">Sugar</label>
-                    </div>
+                        <div>
+                            @Html.CheckBox("isSugarOption", true)
+                            <label for="isSugarOption">Sugar</label>
+                        </div>
                     }
 
                     <input type="submit" class="btn btn-success" value="Go to cart" />

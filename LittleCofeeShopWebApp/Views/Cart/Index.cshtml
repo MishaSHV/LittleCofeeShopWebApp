@@ -1,0 +1,42 @@
+﻿@model LittleCofeeShopWebApp.Domain.Entities.Cart
+
+@{
+    ViewBag.Title = "Cofee Shop: Your Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Your cart</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Quantity</th>
+            <th>Item</th>
+            <th class="text-right">Price</th>
+            <th class="text-right">Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model.Lines)
+        {
+            <tr>
+                <td class="text-center">@line.Quantity</td>
+                <td class="text-left">@line.Recipe.CofeeName</td>
+                <td class="text-right">@line.Recipe.Price.ToString("c")</td>
+                <td class="text-right">
+                    @((line.Quantity * line.Recipe.Price ).ToString("c"))
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Total:</td>
+            <td class="text-right">
+                @Model.ComputeTotalValue().ToString("c")
+            </td>
+        </tr>
+    </tfoot>
+</table>
+<div class="text-center">
+    @Html.ActionLink("Continue shopping", "Index","Home", null, new { @class = "btn btn-primary" })
+</div>

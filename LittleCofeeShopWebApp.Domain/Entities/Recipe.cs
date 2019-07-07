@@ -31,9 +31,11 @@ namespace LittleCofeeShopWebApp.Domain.Entities
             return VolumeSize.GetHashCode() + IsCupCap.GetHashCode() + CofeeId.GetHashCode() + Options.GetHashCode();
         }
 
-        public decimal Price()
+        public decimal Price
         {
-            return CofeePriceCoef * VolumeSize;
+            get{
+                return CofeePriceCoef * VolumeSize;
+            }
         }
     }
 
