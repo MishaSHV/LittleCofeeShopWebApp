@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LittleCofeeShopWebApp.Domain.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,6 @@ namespace LittleCofeeShopWebApp.Domain.Entities
         public string CofeeName { get; set; }
         public decimal CofeePriceCoef { get; set; }
         public decimal VolumeSize { get; set; }
-        public decimal CupPrice { get; set; }
         public bool IsCupCap { get; set; }
         public CofeeOptions Options { get; set; }
 
@@ -22,13 +22,13 @@ namespace LittleCofeeShopWebApp.Domain.Entities
             {
                 return false;
             }
-
-            return ((this.CofeeId == recipe.CofeeId) && (this.Options.Equals(recipe.Options)));
+            bool isEqualVolumes = (this.VolumeSize == recipe.VolumeSize) && (this.IsCupCap == recipe.IsCupCap);
+            return isEqualVolumes && ((this.CofeeId == recipe.CofeeId) && (this.Options.Equals(recipe.Options)));
         }
 
         public override int GetHashCode()
         {
-            return CofeeId.GetHashCode() + Options.GetHashCode();
+            return VolumeSize.GetHashCode() + IsCupCap.GetHashCode() + CofeeId.GetHashCode() + Options.GetHashCode();
         }
 
         public decimal Price()

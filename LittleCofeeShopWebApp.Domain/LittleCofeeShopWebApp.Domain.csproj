@@ -55,6 +55,9 @@
     <Compile Include="Concrete\CofeeShopDbInitializer.cs" />
     <Compile Include="Concrete\EFCofeeRepository.cs" />
     <Compile Include="Concrete\LittleCofeeShopDbContext.cs" />
+    <Compile Include="Concrete\MatchParentAttribute.cs" />
+    <Compile Include="Concrete\ObjectExtensionMethods.cs" />
+    <Compile Include="Concrete\PropertyMatcher.cs" />
     <Compile Include="Entities\Cart.cs" />
     <Compile Include="Entities\CofeePricingModel.cs" />
     <Compile Include="Entities\Order.cs" />
