@@ -166,7 +166,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\MakeOrder\MakeOrder.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Cart\CartIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

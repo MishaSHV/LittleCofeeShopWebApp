@@ -97,7 +97,7 @@ namespace LittleCofeeShopWebApp.Controllers
 
         public ViewResult Index()
         {
-            return View(GetCart());
+            return View("CartIndex",GetCart());
         }
 
         private Cart GetCart()
