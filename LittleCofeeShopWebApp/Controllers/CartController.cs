@@ -36,7 +36,9 @@ namespace LittleCofeeShopWebApp.Controllers
                 recipe.VolumeSize = volumeOption.Size;
                 recipe.IsCupCap = volumeOption.IsCupCap;
 
-                if(isSugarOption)
+                recipe.Options = new CofeeOptions();
+
+                if (isSugarOption)
                 {
                     SugarOption sugarOption = cofee.SugarOptions.FirstOrDefault();
                     if(sugarOption != null)
