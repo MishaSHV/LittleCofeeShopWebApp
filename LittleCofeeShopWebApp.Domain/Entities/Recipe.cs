@@ -28,12 +28,26 @@ namespace LittleCofeeShopWebApp.Domain.Entities
 
         public static bool operator == (Recipe recipe,object obj)
         {
-            return recipe.Equals(obj);
+            if((object)recipe != null)
+            {
+                return recipe.Equals(obj);
+            }
+            else
+            {
+                return (object)recipe == obj;
+            }
         }
 
         public static bool operator != (Recipe recipe, object obj)
         {
-            return !recipe.Equals(obj);
+            if ((object)recipe != null)
+            {
+                return !recipe.Equals(obj);
+            }
+            else
+            {
+                return (object)recipe != obj;
+            }
         }
 
         public override int GetHashCode()
@@ -93,12 +107,26 @@ namespace LittleCofeeShopWebApp.Domain.Entities
 
         public static bool operator == (CofeeOptions cofeeOptions,object obj)
         {
-            return cofeeOptions.Equals(obj);
+            if((object)cofeeOptions!= null)
+            {
+                return cofeeOptions.Equals(obj);
+            }
+            else
+            {
+                return (object)cofeeOptions == obj;
+            }
         }
 
         public static bool operator !=(CofeeOptions cofeeOptions, object obj)
         {
-            return !cofeeOptions.Equals(obj);
+            if((object)cofeeOptions != null)
+            {
+                return !cofeeOptions.Equals(obj);
+            }
+            else
+            {
+                return (object)cofeeOptions != obj;
+            }
         }
     }
 }
