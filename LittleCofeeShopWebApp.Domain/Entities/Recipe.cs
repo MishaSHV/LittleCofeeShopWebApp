@@ -28,7 +28,7 @@ namespace LittleCofeeShopWebApp.Domain.Entities
 
         public static bool operator == (Recipe recipe,object obj)
         {
-            if((object)recipe != null)
+            if(!(recipe is null))
             {
                 return recipe.Equals(obj);
             }
@@ -40,7 +40,7 @@ namespace LittleCofeeShopWebApp.Domain.Entities
 
         public static bool operator != (Recipe recipe, object obj)
         {
-            if ((object)recipe != null)
+            if (!(recipe is null))
             {
                 return !recipe.Equals(obj);
             }
@@ -107,7 +107,7 @@ namespace LittleCofeeShopWebApp.Domain.Entities
 
         public static bool operator == (CofeeOptions cofeeOptions,object obj)
         {
-            if((object)cofeeOptions!= null)
+            if(!(cofeeOptions is null))
             {
                 return cofeeOptions.Equals(obj);
             }
@@ -119,7 +119,7 @@ namespace LittleCofeeShopWebApp.Domain.Entities
 
         public static bool operator !=(CofeeOptions cofeeOptions, object obj)
         {
-            if((object)cofeeOptions != null)
+            if(!(cofeeOptions is null))
             {
                 return !cofeeOptions.Equals(obj);
             }
