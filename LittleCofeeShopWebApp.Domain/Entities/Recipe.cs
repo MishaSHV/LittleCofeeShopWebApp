@@ -26,6 +26,16 @@ namespace LittleCofeeShopWebApp.Domain.Entities
             return isEqualVolumes && ((this.CofeeId == recipe.CofeeId) && (this.Options.Equals(recipe.Options)));
         }
 
+        public static bool operator == (Recipe recipe,object obj)
+        {
+            return recipe.Equals(obj);
+        }
+
+        public static bool operator != (Recipe recipe, object obj)
+        {
+            return !recipe.Equals(obj);
+        }
+
         public override int GetHashCode()
         {
             return VolumeSize.GetHashCode() + IsCupCap.GetHashCode() + CofeeId.GetHashCode() + Options.GetHashCode();
@@ -79,6 +89,16 @@ namespace LittleCofeeShopWebApp.Domain.Entities
             hash = hash * 23 + (MilkOptionId.HasValue ? 0 : MilkOptionId.GetHashCode());
             hash = hash * 23 + (SugarOptionId.HasValue ? 0 : SugarOptionId.GetHashCode());
             return hash;
+        }
+
+        public static bool operator == (CofeeOptions cofeeOptions,object obj)
+        {
+            return cofeeOptions.Equals(obj);
+        }
+
+        public static bool operator !=(CofeeOptions cofeeOptions, object obj)
+        {
+            return !cofeeOptions.Equals(obj);
         }
     }
 }

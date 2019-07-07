@@ -13,7 +13,7 @@ namespace LittleCofeeShopWebApp.Domain.Entities
         public void AddItem(Recipe recipe, int quantity)
         {
             CartLine line = lineCollection
-                .Where(p => p.Recipe == recipe)
+                .Where(p => p.Recipe.Equals(recipe))
                 .FirstOrDefault();
 
             if (line == null)
