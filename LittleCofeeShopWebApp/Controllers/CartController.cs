@@ -19,7 +19,7 @@ namespace LittleCofeeShopWebApp.Controllers
             this.repository = cofeeRepository;
         }
 
-        public RedirectToRouteResult AddToCart(int quantity, int cofeeId, int volumeOptionId,bool isSugarOption,bool isMilkOption = false)
+        public RedirectToRouteResult AddToCart(Cart cart, int quantity, int cofeeId, int volumeOptionId,bool isSugarOption,bool isMilkOption = false)
         {
             Cofee cofee = repository.Products
                 .FirstOrDefault(c => c.CofeeId == cofeeId);
@@ -61,14 +61,14 @@ namespace LittleCofeeShopWebApp.Controllers
                         recipe.Options.MilkUnitName = milkOption.Unit.Name;
                     }
                 }
-                GetCart().AddItem(recipe, quantity);
+                cart.AddItem(recipe, quantity);
 
                 
             }
             return RedirectToAction("Index");
         }
 
-        public RedirectToRouteResult RemoveFromCart(int cofeeId, int volumeOptionId, bool isSugarOption, bool isMilkOption = false)
+        public RedirectToRouteResult RemoveFromCart(Cart cart, int cofeeId, int volumeOptionId, bool isSugarOption, bool isMilkOption = false)
         {
             Cofee cofee = repository.Products
                 .FirstOrDefault(p => p.CofeeId == cofeeId);
@@ -89,26 +89,15 @@ namespace LittleCofeeShopWebApp.Controllers
                                     Options = cofeeOptions
                                 };
 
-                GetCart().RemoveLine(recipe);
+                cart.RemoveLine(recipe);
             }
 
             return RedirectToAction("Index");
         }
 
-        public ViewResult Index()
+        public ViewResult Index(Cart cart)
         {
-            return View("CartIndex",GetCart());
-        }
-
-        private Cart GetCart()
-        {
-            Cart cart = (Cart)Session["Cart"];
-            if (cart == null)
-            {
-                cart = new Cart();
-                Session["Cart"] = cart;
-            }
-            return cart;
+            return View("CartIndex",cart);
         }
 
         protected override void Dispose(bool disposing)

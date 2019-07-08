@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using LittleCofeeShopWebApp.Domain.Entities;
+using LittleCofeeShopWebApp.Infrastructure.Binders;
 
 namespace LittleCofeeShopWebApp
 {
@@ -13,6 +15,7 @@ namespace LittleCofeeShopWebApp
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
         }
     }
 }
