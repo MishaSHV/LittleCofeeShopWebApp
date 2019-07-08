@@ -2,6 +2,10 @@
 using System.Linq;
 using LittleCofeeShopWebApp.Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using LittleCofeeShopWebApp.Domain.Abstract;
+using Moq;
+using LittleCofeeShopWebApp.Controllers;
+using System.Web.Mvc;
 
 namespace LittleCofeeShopWebApp.Test
 {
@@ -12,8 +16,8 @@ namespace LittleCofeeShopWebApp.Test
         public void Can_Add_New_Lines()
         {
             // Arrange - create some test products
-            Recipe r1 = new Recipe { CofeeId = 1, CofeeName = "Espresso" };
-            Recipe r2 = new Recipe { CofeeId = 2, CofeeName = "Latte" };
+            Recipe r1 = new Recipe { CofeeId = 1, CofeeName = "Espresso", Options = new CofeeOptions() };
+            Recipe r2 = new Recipe { CofeeId = 2, CofeeName = "Latte", Options = new CofeeOptions() };
             // Arrange - create a new cart
             Cart target = new Cart();
             // Act
@@ -30,8 +34,8 @@ namespace LittleCofeeShopWebApp.Test
         public void Can_Add_Quantity_For_Existing_Lines()
         {
             // Arrange - create some test products
-            Recipe r1 = new Recipe { CofeeId = 1, CofeeName = "Espresso" };
-            Recipe r2 = new Recipe { CofeeId = 2, CofeeName = "Latte" };
+            Recipe r1 = new Recipe { CofeeId = 1, CofeeName = "Espresso", Options = new CofeeOptions() };
+            Recipe r2 = new Recipe { CofeeId = 2, CofeeName = "Latte", Options = new CofeeOptions() };
             // Arrange - create a new cart
             Cart target = new Cart();
             // Act
@@ -49,9 +53,9 @@ namespace LittleCofeeShopWebApp.Test
         public void Can_Remove_Line()
         {
             // Arrange - create some test products
-            Recipe r1 = new Recipe { CofeeId = 1, CofeeName = "Espresso" };
-            Recipe r2 = new Recipe { CofeeId = 2, CofeeName = "Latte" };
-            Recipe r3 = new Recipe { CofeeId = 3, CofeeName = "Americano" };
+            Recipe r1 = new Recipe { CofeeId = 1, CofeeName = "Espresso", Options = new CofeeOptions() };
+            Recipe r2 = new Recipe { CofeeId = 2, CofeeName = "Latte", Options = new CofeeOptions() };
+            Recipe r3 = new Recipe { CofeeId = 3, CofeeName = "Americano", Options = new CofeeOptions() };
             // Arrange - create a new cart
             Cart target = new Cart();
             // Arrange - add some products to the cart
@@ -70,8 +74,8 @@ namespace LittleCofeeShopWebApp.Test
         public void Calculate_Cart_Total()
         {
             // Arrange - create some test products
-            Recipe r1 = new Recipe { CofeeId = 1, CofeeName = "Espresso",CofeePriceCoef = 2.0M,VolumeSize = 0.133M };
-            Recipe r2 = new Recipe { CofeeId = 2, CofeeName = "Latte", CofeePriceCoef = 3.0M, VolumeSize = 0.250M };
+            Recipe r1 = new Recipe { CofeeId = 1, CofeeName = "Espresso",CofeePriceCoef = 2.0M,VolumeSize = 0.133M,Options =new CofeeOptions() };
+            Recipe r2 = new Recipe { CofeeId = 2, CofeeName = "Latte", CofeePriceCoef = 3.0M, VolumeSize = 0.250M, Options = new CofeeOptions() };
             // Arrange - create a new cart
             Cart target = new Cart();
             // Act
@@ -98,6 +102,66 @@ namespace LittleCofeeShopWebApp.Test
             target.Clear();
             // Assert
             Assert.AreEqual(target.Lines.Count(), 0);
+        }
+
+        [TestMethod]
+        public void Can_Add_To_Cart()
+        {
+            // Arrange - create the mock repository
+            Mock<ICofeeRepository> mock = new Mock<ICofeeRepository>();
+            mock.Setup(m => m.Products).Returns(new Cofee[] {
+            new Cofee{
+                CofeeId =1,
+                Name ="Espresso",
+                PriceCoeff =2.0M,
+                VolumeOptions = new VolumeOption[]{ new VolumeOption {VolumeOptionId=1, Size=0.133M,Unit =new Unit {Name = "Litre" } } },
+                SugarOptions=new SugarOption[]{ new SugarOption {SugarOptionId = 1,Size = 1,Price = 0, Unit = new Unit { Name = "Not avaible" } } } } 
+                }.AsQueryable());
+            // Arrange - create a Cart
+            Cart cart = new Cart();
+            // Arrange - create the controller
+            CartController target = new CartController(mock.Object);
+            // Act - add a product to the cart
+            target.AddToCart(cart, 1, 1, 1, true);
+            // Assert
+            Assert.AreEqual(cart.Lines.Count(), 1);
+            Assert.AreEqual(cart.Lines.ToArray()[0].Recipe.CofeeId, 1);
+        }
+
+        [TestMethod]
+        public void Adding_Product_To_Cart_Goes_To_Cart_Screen()
+        {
+            // Arrange - create the mock repository
+            Mock<ICofeeRepository> mock = new Mock<ICofeeRepository>();
+            mock.Setup(m => m.Products).Returns(new Cofee[] {
+            new Cofee{
+                CofeeId =1,
+                Name ="Espresso",
+                PriceCoeff =2.0M,
+                VolumeOptions = new VolumeOption[]{ new VolumeOption {VolumeOptionId=1, Size=0.133M,Unit =new Unit {Name = "Litre" } } },
+                SugarOptions=new SugarOption[]{ new SugarOption {SugarOptionId = 1,Size = 1,Price = 0, Unit = new Unit { Name = "Not avaible" } } } }
+                }.AsQueryable());
+            // Arrange - create a Cart
+            Cart cart = new Cart();
+            // Arrange - create the controller
+            CartController target = new CartController(mock.Object);
+            // Act - add a product to the cart
+            RedirectToRouteResult result = target.AddToCart(cart, 2, 1, 1, true);
+            // Assert
+            Assert.AreEqual(result.RouteValues["action"], "Index");
+        }
+
+        [TestMethod]
+        public void Can_View_Cart_Contents()
+        {
+            // Arrange - create a Cart
+            Cart cart = new Cart();
+            // Arrange - create the controller
+            CartController target = new CartController(null);
+            // Act - call the Index action method
+            Cart result = (Cart)target.Index(cart).ViewData.Model;
+            // Assert
+            Assert.AreSame(result, cart);
         }
     }
 }
