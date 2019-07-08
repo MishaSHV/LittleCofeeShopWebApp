@@ -33,6 +33,7 @@ namespace LittleCofeeShopWebApp.Controllers
                 recipe.CofeeName = cofee.Name;
                 recipe.CofeePriceCoef = cofee.PriceCoeff;
 
+                recipe.VolumeOptionId = volumeOption.VolumeOptionId;
                 recipe.VolumeSize = volumeOption.Size;
                 recipe.IsCupCap = volumeOption.IsCupCap;
 

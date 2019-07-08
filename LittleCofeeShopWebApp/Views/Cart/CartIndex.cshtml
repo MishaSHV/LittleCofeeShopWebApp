@@ -5,11 +5,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    #cartTable td {
+        vertical-align: middle;
+    }
+</style>
+
 <h2>Your cart</h2>
 <div class="container">
     <div class="row">
         <div class="col-md-9 ">
-            <table class="table">
+            <table id="cartTable" class="table">
                 <thead>
                     <tr>
                         <th>Quantity</th>
@@ -35,6 +41,17 @@
                         <td class="text-right">@line.Recipe.Price.ToString("c")</td>
                         <td class="text-right">
                             @((line.Quantity * line.Recipe.Price).ToString("c"))
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("RemoveFromCart", "Cart"))
+                            {
+                                @Html.Hidden("cofeeId", line.Recipe.CofeeId)
+                                @Html.Hidden("volumeOptionId", line.Recipe.VolumeOptionId);
+                                @Html.Hidden("isSugarOption", line.Recipe.Options.SugarOptionId.HasValue);
+                                @Html.Hidden("isMilkOption", line.Recipe.Options.MilkOptionId.HasValue);
+                                <input class="btn btn-sm btn-warning"
+                                       type="submit" value="Remove" />
+                            }
                         </td>
                     </tr>
                     }

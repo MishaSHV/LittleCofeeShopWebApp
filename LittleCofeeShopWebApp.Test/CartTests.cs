@@ -74,8 +74,19 @@ namespace LittleCofeeShopWebApp.Test
         public void Calculate_Cart_Total()
         {
             // Arrange - create some test products
-            Recipe r1 = new Recipe { CofeeId = 1, CofeeName = "Espresso",CofeePriceCoef = 2.0M,VolumeSize = 0.133M,Options =new CofeeOptions() };
-            Recipe r2 = new Recipe { CofeeId = 2, CofeeName = "Latte", CofeePriceCoef = 3.0M, VolumeSize = 0.250M, Options = new CofeeOptions() };
+            Recipe r1 = new Recipe {
+                CofeeId = 1,
+                CofeeName = "Espresso",
+                CofeePriceCoef = 2.0M,
+                VolumeOptionId = 1,
+                VolumeSize = 0.133M,Options =new CofeeOptions() };
+            Recipe r2 = new Recipe {
+                CofeeId = 2,
+                CofeeName = "Latte",
+                CofeePriceCoef = 3.0M,
+                VolumeSize = 0.250M,
+                Options = new CofeeOptions()
+            };
             // Arrange - create a new cart
             Cart target = new Cart();
             // Act
@@ -91,8 +102,19 @@ namespace LittleCofeeShopWebApp.Test
         public void Can_Clear_Contents()
         {
             // Arrange - create some test products
-            Recipe r1 = new Recipe { CofeeId = 1, CofeeName = "Espresso", CofeePriceCoef = 2.0M, VolumeSize = 0.133M };
-            Recipe r2 = new Recipe { CofeeId = 2, CofeeName = "Latte", CofeePriceCoef = 3.0M, VolumeSize = 0.250M };
+            Recipe r1 = new Recipe {
+                CofeeId = 1,
+                CofeeName = "Espresso",
+                CofeePriceCoef = 2.0M,
+                VolumeOptionId = 1,
+                VolumeSize = 0.133M
+            };
+            Recipe r2 = new Recipe {
+                CofeeId = 2,
+                CofeeName = "Latte",
+                CofeePriceCoef = 3.0M,
+                VolumeOptionId = 1,
+                VolumeSize = 0.250M };
             // Arrange - create a new cart
             Cart target = new Cart();
             // Arrange - add some items
@@ -114,8 +136,11 @@ namespace LittleCofeeShopWebApp.Test
                 CofeeId =1,
                 Name ="Espresso",
                 PriceCoeff =2.0M,
-                VolumeOptions = new VolumeOption[]{ new VolumeOption {VolumeOptionId=1, Size=0.133M,Unit =new Unit {Name = "Litre" } } },
-                SugarOptions=new SugarOption[]{ new SugarOption {SugarOptionId = 1,Size = 1,Price = 0, Unit = new Unit { Name = "Not avaible" } } } } 
+                VolumeOptions = new VolumeOption[]{ new VolumeOption {
+                    VolumeOptionId = 1,
+                    Size = 0.133M,
+                    Unit = new Unit {Name = "Litre" } } },
+                SugarOptions = new SugarOption[]{ new SugarOption {SugarOptionId = 1,Size = 1,Price = 0, Unit = new Unit { Name = "Not avaible" } } } } 
                 }.AsQueryable());
             // Arrange - create a Cart
             Cart cart = new Cart();
@@ -138,7 +163,10 @@ namespace LittleCofeeShopWebApp.Test
                 CofeeId =1,
                 Name ="Espresso",
                 PriceCoeff =2.0M,
-                VolumeOptions = new VolumeOption[]{ new VolumeOption {VolumeOptionId=1, Size=0.133M,Unit =new Unit {Name = "Litre" } } },
+                VolumeOptions = new VolumeOption[]{ new VolumeOption {
+                    VolumeOptionId = 1,
+                    Size = 0.133M,
+                    Unit = new Unit {Name = "Litre" } } },
                 SugarOptions=new SugarOption[]{ new SugarOption {SugarOptionId = 1,Size = 1,Price = 0, Unit = new Unit { Name = "Not avaible" } } } }
                 }.AsQueryable());
             // Arrange - create a Cart

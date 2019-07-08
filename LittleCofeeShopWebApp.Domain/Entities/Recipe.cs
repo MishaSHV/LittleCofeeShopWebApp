@@ -11,6 +11,8 @@ namespace LittleCofeeShopWebApp.Domain.Entities
         public int CofeeId { get; set; }
         public string CofeeName { get; set; }
         public decimal CofeePriceCoef { get; set; }
+
+        public int VolumeOptionId { get; set; }
         public decimal VolumeSize { get; set; }
         public bool IsCupCap { get; set; }
         public CofeeOptions Options { get; set; }
