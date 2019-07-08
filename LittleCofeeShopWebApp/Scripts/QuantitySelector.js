@@ -1,5 +1,12 @@
 ﻿//plugin bootstrap minus and plus
 //http://jsfiddle.net/laelitenetwork/puJ6G/
+
+function clearQuantity() {
+    var input = $("input[name='" + "quantity" + "']");
+    fieldName = $('button').attr('data-field');
+    input.val(1).change();
+};
+
 $('.btn-number').click(function (e) {
     e.preventDefault();
 

@@ -23,8 +23,6 @@ namespace LittleCofeeShopWebApp.Controllers
             return View(repository.Products);
         }
 
-
-
         protected override void Dispose(bool disposing)
         {
             if (disposed)

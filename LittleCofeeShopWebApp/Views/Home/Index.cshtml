@@ -5,29 +5,7 @@
     ViewBag.Title = "Little cofee shop: test project";
 }
 
-<div class=" navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Cofee shop</a>
-        </div>
-        <div class="collapse navbar-collapse">
-            <form class="navbar-form navbar-right">
-                <div class="form-group">
-                    <input type="text" placeholder="Email" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <input type="password" placeholder="Password" class="form-control" />
-                </div>
-                <button type="submit" class="btn btn-success">Sign in</button>
-            </form>
-        </div>
-    </div>
-</div>
+
 <div class="jumbotron">
     <div class="container">
         <h1>Hello, word!</h1>
@@ -58,6 +36,20 @@
                             <thead>
                                 Volumes
                             </thead>
+                            <tr>
+                                <th>
+                                    Volume
+                                </th>
+                                <th>
+                                    Unit
+                                </th>
+                                <th>
+                                    Price
+                                </th>
+                                <th>
+                                    Cupcap
+                                </th>
+                            </tr>
                             @foreach (var volumeOption in cofee.VolumeOptions)
                             {
                                 <tr>
@@ -67,32 +59,40 @@
                                     <td>
                                         @volumeOption.Unit.ShortName
                                     </td>
+                                    <td>
+                                        @((cofee.PriceCoeff * volumeOption.Size).ToString("F2"))$
+                                    </td>
+                                    <td>
+                                        @if (volumeOption.IsCupCap)
+                                        {
+                                            @:avaible
+                                        }
+                                    </td>
                                 </tr>
                             }
                         </table>
+                        <div class=" col-md-3">
+                            @if (cofee.MilkOptions.Count != 0)
+                            {
+                                <p>
+                                    <span class="label label-info">Milk</span>
+                                </p>
+
+                            }
+                            @if (cofee.SugarOptions.Count != 0)
+                            {
+                                <p>
+                                    <span class="label label-info">Sugar</span>
+                                </p>
+                            }
+                        </div>
                     </div>
-
-                    @if (cofee.MilkOptions.Count != 0)
-                    {
-                        <p>
-                            <span class="label label-info">Milk</span>
-                        </p>
-
-
-                    }
-                    @if (cofee.SugarOptions.Count != 0)
-                    {
-                        <p>
-                            <span class="label label-info">Sugar</span>
-                        </p>
-                    }
-
                 </div>
-                <div class="col-md-3 col-md-push-3">
-                    @Html.Action("MakeOrder", "MakeOrder", new { Cofee = cofee })
-                    <p><a class="btn btn-primary" data-toggle="modal" data-target=@($"#{cofee.Name}{cofee.CofeeId}")>Order »</a></p>
-                </div>
-            </div>
+            <div class="col-md-3 col-md-push-3">
+                 @Html.Action("MakeOrder", "MakeOrder", new { Cofee = cofee })
+                      <p><a class="btn btn-primary" data-toggle="modal" data-target=@($"#{cofee.Name}{cofee.CofeeId}") onclick="clearQuantity()">Order »</a></p>
+             </div>
+          </div>
         }
     </div>
     <hr />

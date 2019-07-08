@@ -1,0 +1,74 @@
+﻿@model LittleCofeeShopWebApp.Domain.Entities.Cart
+
+@{
+    ViewBag.Title = "Cofee Shop: Your Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #cartTable td {
+        vertical-align: middle;
+    }
+</style>
+
+<h2>Your cart</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 ">
+            <table id="cartTable" class="table">
+                <thead>
+                    <tr>
+                        <th>Quantity</th>
+                        <th>Item</th>
+                        <th class="text-right">Volume size</th>
+                        <th class="text-right">Cup cap</th>
+                        <th class="text-right">Sugar</th>
+                        <th class="text-right">Milk</th>
+                        <th class="text-right">Price</th>
+                        <th class="text-right">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var line in Model.Lines)
+                    {
+                    <tr>
+                        <td class="text-center">@line.Quantity</td>
+                        <td class="text-left">@line.Recipe.CofeeName</td>
+                        <td class="text-right">@line.Recipe.VolumeSize.ToString("F2")</td>
+                        <td class="text-right">@(line.Recipe.IsCupCap ? "included" : "-")</td>
+                        <td class="text-right">@(line.Recipe.Options.SugarOptionId.HasValue ? "included" : "-")</td>
+                        <td class="text-right">@(line.Recipe.Options.MilkOptionId.HasValue ? "included" : "-")</td>
+                        <td class="text-right">@line.Recipe.Price.ToString("c")</td>
+                        <td class="text-right">
+                            @((line.Quantity * line.Recipe.Price).ToString("c"))
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("RemoveFromCart", "Cart"))
+                            {
+                                @Html.Hidden("cofeeId", line.Recipe.CofeeId)
+                                @Html.Hidden("volumeOptionId", line.Recipe.VolumeOptionId);
+                                @Html.Hidden("isSugarOption", line.Recipe.Options.SugarOptionId.HasValue);
+                                @Html.Hidden("isMilkOption", line.Recipe.Options.MilkOptionId.HasValue);
+                                <input class="btn btn-sm btn-warning"
+                                       type="submit" value="Remove" />
+                            }
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="7" class="text-right">Total:</td>
+                        <td class="text-right">
+                            @Model.ComputeTotalValue().ToString("c")
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="text-center">
+                @Html.ActionLink("Continue shopping", "Index", "Home", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+</div>
+
