@@ -101,6 +101,11 @@ namespace LittleCofeeShopWebApp.Controllers
             return View("CartIndex",cart);
         }
 
+        public PartialViewResult Summary(Cart cart)
+        {
+            return PartialView(cart);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposed)
