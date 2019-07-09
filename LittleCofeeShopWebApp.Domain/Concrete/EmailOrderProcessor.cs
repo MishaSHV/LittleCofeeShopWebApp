@@ -18,7 +18,7 @@ namespace LittleCofeeShopWebApp.Domain.Concrete
         public string ServerName = "smtp.example.com";
         public int ServerPort = 587;
         public bool WriteAsFile = false;
-        public string FileLocation = @"c:\sports_store_emails";
+        public string FileLocation = @"c:\cofee_shop_emails";
     }
 
     public class EmailOrderProcessor : IOrderProcessor
