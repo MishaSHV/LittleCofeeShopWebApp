@@ -52,8 +52,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\ICofeeRepository.cs" />
+    <Compile Include="Abstract\IOrderProcessor.cs" />
     <Compile Include="Concrete\CofeeShopDbInitializer.cs" />
     <Compile Include="Concrete\EFCofeeRepository.cs" />
+    <Compile Include="Concrete\EmailOrderProcessor.cs" />
     <Compile Include="Concrete\LittleCofeeShopDbContext.cs" />
     <Compile Include="Concrete\MatchParentAttribute.cs" />
     <Compile Include="Concrete\ObjectExtensionMethods.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="Entities\CofeePricingModel.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\Recipe.cs" />
+    <Compile Include="Entities\ShippingDetails.cs" />
     <Compile Include="Entities\Unit.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

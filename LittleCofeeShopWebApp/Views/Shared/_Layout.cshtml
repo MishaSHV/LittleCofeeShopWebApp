@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="~/Content/bootstrap.css">
     <link rel="stylesheet" href="~/Content/bootstrap-theme.css">
     <link rel="stylesheet" href="~/Content/MyStyles.css">
+    <link rel="stylesheet" href="~/Content/ErrorStyles.css">
     <title>@ViewBag.Title</title>
 </head>
 <body>
@@ -21,10 +22,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Cofee shop</a>
-                @Html.Action("Summary", "Cart")
+                <a class="navbar-brand" href=@Url.Action("Index", "Home")>Cofee shop</a>
+                
             </div>
             <div class="collapse navbar-collapse">
+                <div>
+                    @Html.Action("Summary", "Cart")
+                </div>
                 <form class="navbar-form navbar-right">
                     <div class="form-group">
                         <input type="text" placeholder="Email" class="form-control" />
