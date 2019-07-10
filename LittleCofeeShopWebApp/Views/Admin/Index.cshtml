@@ -1,4 +1,5 @@
 ﻿@using LittleCofeeShopWebApp.Domain.Entities
+@using System.Globalization
 @model IEnumerable<Cofee>
 
 @{
@@ -23,7 +24,7 @@
                 <tr>
                     <td class="text-right">@item.CofeeId</td>
                     <td>@Html.ActionLink(item.Name, "Edit", new { item.CofeeId })</td>
-                    <td class="text-right">@item.PriceCoeff.ToString("c")</td>
+                    <td class="text-right">@item.PriceCoeff.ToString("c", CultureInfo.GetCultureInfo("en-US"))</td>
                     <td class="text-center">
                         @using (Html.BeginForm("Delete", "Admin"))
                         {
