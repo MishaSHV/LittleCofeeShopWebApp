@@ -140,7 +140,7 @@ namespace LittleCofeeShopWebApp.Test
                     VolumeOptionId = 1,
                     Size = 0.133M,
                     Unit = new Unit {Name = "Litre" } } },
-                SugarOptions = new SugarOption[]{ new SugarOption {SugarOptionId = 1,Size = 1,Price = 0, Unit = new Unit { Name = "Not avaible" } } } } 
+                SugarOptions = new SugarOption[]{ new SugarOption {SugarOptionId = 1,Size = 1,Price = 0, Unit = new Unit { Name = "Teaspoon" } } } } 
                 }.AsQueryable());
             // Arrange - create a Cart
             Cart cart = new Cart();
