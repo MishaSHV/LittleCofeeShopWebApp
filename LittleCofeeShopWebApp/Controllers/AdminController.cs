@@ -1,4 +1,5 @@
 ﻿using LittleCofeeShopWebApp.Domain.Abstract;
+using LittleCofeeShopWebApp.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,13 @@ namespace LittleCofeeShopWebApp.Controllers
         public ViewResult Index()
         {
             return View(repository.Products);
+        }
+
+        public ViewResult Edit(int cofeeId)
+        {
+            Cofee cofee = repository.Products
+            .FirstOrDefault(p => p.CofeeId == cofeeId);
+            return View(cofee);
         }
     }
 }
