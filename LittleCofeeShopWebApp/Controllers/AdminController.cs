@@ -27,5 +27,21 @@ namespace LittleCofeeShopWebApp.Controllers
             .FirstOrDefault(p => p.CofeeId == cofeeId);
             return View(cofee);
         }
+
+        [HttpPost]
+        public ActionResult Edit(Cofee cofee)
+        {
+            if (ModelState.IsValid)
+            {
+                repository.SaveProduct(cofee);
+                TempData["message"] = string.Format("{0} has been saved", cofee.Name);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                // there is something wrong with the data values
+                return View(cofee);
+            }
+        }
     }
 }

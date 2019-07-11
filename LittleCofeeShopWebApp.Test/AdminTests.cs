@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Mvc;
 using LittleCofeeShopWebApp.Controllers;
 using LittleCofeeShopWebApp.Domain.Abstract;
 using LittleCofeeShopWebApp.Domain.Entities;
@@ -117,6 +118,42 @@ namespace LittleCofeeShopWebApp.Test
             Cofee result = (Cofee)target.Edit(4).ViewData.Model;
             // Assert
             Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void Can_Save_Valid_Changes()
+        {
+            // Arrange - create mock repository
+            Mock<ICofeeRepository> mock = new Mock<ICofeeRepository>();
+            // Arrange - create the controller
+            AdminController target = new AdminController(mock.Object);
+            // Arrange - create a product
+            Cofee cofee = new Cofee { Name = "Test" };
+            // Act - try to save the product
+            ActionResult result = target.Edit(cofee);
+            // Assert - check that the repository was called
+            mock.Verify(m => m.SaveProduct(cofee));
+            // Assert - check the method result type
+            Assert.IsNotInstanceOfType(result, typeof(ViewResult));
+        }
+
+        [TestMethod]
+        public void Cannot_Save_Invalid_Changes()
+        {
+            // Arrange - create mock repository
+            Mock<ICofeeRepository> mock = new Mock<ICofeeRepository>();
+            // Arrange - create the controller
+            AdminController target = new AdminController(mock.Object);
+            // Arrange - create a product
+            Cofee cofee = new Cofee { Name = "Test" };
+            // Arrange - add an error to the model state
+            target.ModelState.AddModelError("error", "error");
+            // Act - try to save the product
+            ActionResult result = target.Edit(cofee);
+            // Assert - check that the repository was not called
+            mock.Verify(m => m.SaveProduct(It.IsAny<Cofee>()), Times.Never());
+            // Assert - check the method result type
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
     }
 }
