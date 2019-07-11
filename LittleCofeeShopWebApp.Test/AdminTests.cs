@@ -37,5 +37,86 @@ namespace LittleCofeeShopWebApp.Test
             Assert.AreEqual(result.Length, 1);
             Assert.AreEqual("Espresso", result[0].Name);
         }
+
+        [TestMethod]
+        public void Can_Edit_Product()
+        {
+            // Arrange - create the mock repository
+            Mock<ICofeeRepository> mock = new Mock<ICofeeRepository>();
+            var volumeOptions = new VolumeOption[]{ new VolumeOption {
+                    VolumeOptionId = 1,
+                    Size = 0.133M,
+                    Unit = new Unit {Name = "Litre" } } };
+            var sugarOptions = new SugarOption[] { new SugarOption { SugarOptionId = 1, Size = 1, Price = 0, Unit = new Unit { Name = "Teaspoon" } } };
+            var espresso = new Cofee
+            {
+                CofeeId = 1,
+                Name = "Espresso",
+                PriceCoeff = 2.0M,
+                VolumeOptions = volumeOptions,
+                SugarOptions = sugarOptions
+            };
+
+            var americano = new Cofee
+            {
+                CofeeId = 2,
+                Name = "Americano",
+                PriceCoeff = 3.0M,
+                VolumeOptions = volumeOptions,
+                SugarOptions = sugarOptions
+            };
+
+            mock.Setup(m => m.Products).Returns(new Cofee[] {
+                espresso, americano
+                }.AsQueryable());
+
+            // Arrange - create the controller
+            AdminController target = new AdminController(mock.Object);
+            // Act
+            Cofee c1 = target.Edit(1).ViewData.Model as Cofee;
+            Cofee c2 = target.Edit(2).ViewData.Model as Cofee;
+            // Assert
+            Assert.AreEqual(1, c1.CofeeId);
+            Assert.AreEqual(2, c2.CofeeId);
+        }
+
+        [TestMethod]
+        public void Cannot_Edit_Nonexistent_Product()
+        {
+            // Arrange - create the mock repository
+            Mock<ICofeeRepository> mock = new Mock<ICofeeRepository>();
+            var volumeOptions = new VolumeOption[]{ new VolumeOption {
+                    VolumeOptionId = 1,
+                    Size = 0.133M,
+                    Unit = new Unit {Name = "Litre" } } };
+            var sugarOptions = new SugarOption[] { new SugarOption { SugarOptionId = 1, Size = 1, Price = 0, Unit = new Unit { Name = "Teaspoon" } } };
+            var espresso = new Cofee
+            {
+                CofeeId = 1,
+                Name = "Espresso",
+                PriceCoeff = 2.0M,
+                VolumeOptions = volumeOptions,
+                SugarOptions = sugarOptions
+            };
+
+            var americano = new Cofee
+            {
+                CofeeId = 2,
+                Name = "Americano",
+                PriceCoeff = 3.0M,
+                VolumeOptions = volumeOptions,
+                SugarOptions = sugarOptions
+            };
+
+            mock.Setup(m => m.Products).Returns(new Cofee[] {
+                espresso, americano
+                }.AsQueryable());
+            // Arrange - create the controller
+            AdminController target = new AdminController(mock.Object);
+            // Act
+            Cofee result = (Cofee)target.Edit(4).ViewData.Model;
+            // Assert
+            Assert.IsNull(result);
+        }
     }
 }

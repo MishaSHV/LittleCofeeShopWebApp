@@ -15,7 +15,6 @@ namespace LittleCofeeShopWebApp.Domain.Entities
         public int UserId { get; set; }
         public DateTime OrderTime { get; set; }
 
-        [Flags]
         public enum OrderState
         {
             Default,
