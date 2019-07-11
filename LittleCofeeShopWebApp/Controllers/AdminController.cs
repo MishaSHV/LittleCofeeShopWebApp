@@ -43,5 +43,22 @@ namespace LittleCofeeShopWebApp.Controllers
                 return View(cofee);
             }
         }
+
+        public ViewResult Create()
+        {
+            return View("Edit", new Cofee());
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int cofeeId)
+        {
+            Cofee deletedProduct = repository.DeleteProduct(cofeeId);
+            if (deletedProduct != null)
+            {
+                TempData["message"] = string.Format("{0} was deleted",
+                deletedProduct.Name);
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

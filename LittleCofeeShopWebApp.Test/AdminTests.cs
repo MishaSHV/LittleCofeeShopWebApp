@@ -155,5 +155,48 @@ namespace LittleCofeeShopWebApp.Test
             // Assert - check the method result type
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
+
+        [TestMethod]
+        public void Can_Delete_Valid_Products()
+        {
+            // Arrange - create a Product
+            Cofee cofee = new Cofee { CofeeId = 2, Name = "Test" };
+            // Arrange - create the mock repository
+            // Arrange - create the mock repository
+            Mock<ICofeeRepository> mock = new Mock<ICofeeRepository>();
+            var volumeOptions = new VolumeOption[]{ new VolumeOption {
+                    VolumeOptionId = 1,
+                    Size = 0.133M,
+                    Unit = new Unit {Name = "Litre" } } };
+            var sugarOptions = new SugarOption[] { new SugarOption { SugarOptionId = 1, Size = 1, Price = 0, Unit = new Unit { Name = "Teaspoon" } } };
+            var espresso = new Cofee
+            {
+                CofeeId = 1,
+                Name = "Espresso",
+                PriceCoeff = 2.0M,
+                VolumeOptions = volumeOptions,
+                SugarOptions = sugarOptions
+            };
+
+            var americano = new Cofee
+            {
+                CofeeId = 2,
+                Name = "Americano",
+                PriceCoeff = 3.0M,
+                VolumeOptions = volumeOptions,
+                SugarOptions = sugarOptions
+            };
+
+            mock.Setup(m => m.Products).Returns(new Cofee[] {
+                espresso, americano
+                }.AsQueryable());
+            // Arrange - create the controller
+            AdminController target = new AdminController(mock.Object);
+            // Act - delete the product
+            target.Delete(cofee.CofeeId);
+            // Assert - ensure that the repository delete method was
+            // called with the correct Product
+            mock.Verify(m => m.DeleteProduct(cofee.CofeeId));
+        }
     }
 }

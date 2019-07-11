@@ -20,9 +20,15 @@ namespace LittleCofeeShopWebApp.Domain.Concrete
                     .Include("SugarOptions.Unit"); }
         }
 
-        public Cofee DeleteProduct(int productID)
+        public Cofee DeleteProduct(int cofeeId)
         {
-            throw new NotImplementedException();
+            Cofee dbEntry = context.CofeeRecords.Find(cofeeId);
+            if (dbEntry != null)
+            {
+                context.CofeeRecords.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
         }
 
         public void Dispose()

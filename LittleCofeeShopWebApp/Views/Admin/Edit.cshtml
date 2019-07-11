@@ -12,82 +12,83 @@
     <div class="panel-heading">
         <h3>Edit @Model.Name</h3>
     </div>
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Edit", "Admin"))
     {
-        <div class="panel-body">
-            @Html.HiddenFor(m => m.CofeeId)
-            @foreach (var property in ViewData.ModelMetadata.Properties)
-            {
-                if (property.PropertyName != "CofeeId")
+        {
+            <div class="panel-body">
+                @Html.HiddenFor(m => m.CofeeId)
+                @foreach (var property in ViewData.ModelMetadata.Properties)
                 {
-            <div class="form-group">
-                <label>@(property.DisplayName ?? property.PropertyName)</label>
-                @if (property.PropertyName == "Description")
-                {
-                    @Html.TextArea(property.PropertyName, null,
-                    new { @class = "form-control", rows = 5 })
-                }
-                else if (property.PropertyName == "VolumeOptions")
-                {
-                    var volumeOptionsGrid = new WebGrid(Model.VolumeOptions, canPage: false);
-                    <div>
-                        @volumeOptionsGrid.GetHtml(tableStyle: "table table-bordered table-responsive table-hover",
-                            columns: volumeOptionsGrid.Columns(
-                                 volumeOptionsGrid.Column("VolumeOptionId", "VolumeOption Id"),
-                                 volumeOptionsGrid.Column("Name", "Name"),
-                                 volumeOptionsGrid.Column("Size", "Size"),
-                                 volumeOptionsGrid.Column("IsCupCap", "IsCupCap"),
-                                 volumeOptionsGrid.Column("CupPrice", "CupPrice")
-                            )
-                            )
-                    </div>
-                }
-                else if (property.PropertyName == "SugarOptions")
-                {
-                    if (Model.SugarOptions.Count != 0)
+                    if (property.PropertyName != "CofeeId")
                     {
-                        var volumeOptionsGrid = new WebGrid(Model.SugarOptions, canPage: false);
-                        <div>
-                            @volumeOptionsGrid.GetHtml(tableStyle: "table table-bordered table-responsive table-hover",
-                                columns: volumeOptionsGrid.Columns(
-                                     volumeOptionsGrid.Column("SugarOptionId", "SugarOption Id"),
-                                     volumeOptionsGrid.Column("Size", "Size"),
-                                     volumeOptionsGrid.Column("Price", "Price")
-                                )
-                                )
+                        <div class="form-group">
+                            <label>@(property.DisplayName ?? property.PropertyName)</label>
+                            @if (property.PropertyName == "Description")
+                            {
+                                @Html.TextArea(property.PropertyName, null,
+                                new { @class = "form-control", rows = 5 })
+                            }
+                            else if (property.PropertyName == "VolumeOptions")
+                            {
+                                var volumeOptionsGrid = new WebGrid(Model.VolumeOptions, canPage: false);
+                                <div>
+                                    @volumeOptionsGrid.GetHtml(tableStyle: "table table-bordered table-responsive table-hover",
+                                        columns: volumeOptionsGrid.Columns(
+                                             volumeOptionsGrid.Column("VolumeOptionId", "VolumeOption Id"),
+                                             volumeOptionsGrid.Column("Name", "Name"),
+                                             volumeOptionsGrid.Column("Size", "Size"),
+                                             volumeOptionsGrid.Column("IsCupCap", "IsCupCap"),
+                                             volumeOptionsGrid.Column("CupPrice", "CupPrice")
+                                        )
+                                        )
+                                </div>
+                            }
+                            else if (property.PropertyName == "SugarOptions")
+                            {
+                                if (Model.SugarOptions.Count != 0)
+                                {
+                                    var volumeOptionsGrid = new WebGrid(Model.SugarOptions, canPage: false);
+                                    <div>
+                                        @volumeOptionsGrid.GetHtml(tableStyle: "table table-bordered table-responsive table-hover",
+                                            columns: volumeOptionsGrid.Columns(
+                                                 volumeOptionsGrid.Column("SugarOptionId", "SugarOption Id"),
+                                                 volumeOptionsGrid.Column("Size", "Size"),
+                                                 volumeOptionsGrid.Column("Price", "Price")
+                                            )
+                                            )
+                                    </div>
+                                }
+                            }
+                            else if (property.PropertyName == "MilkOptions")
+                            {
+                                if (Model.MilkOptions.Count != 0)
+                                {
+                                    var volumeOptionsGrid = new WebGrid(Model.MilkOptions, canPage: false);
+                                    <div>
+                                        @volumeOptionsGrid.GetHtml(tableStyle: "table table-bordered table-responsive table-hover",
+                                            columns: volumeOptionsGrid.Columns(
+                                                 volumeOptionsGrid.Column("MilkOptionId", "MilkOption Id"),
+                                                 volumeOptionsGrid.Column("Size", "Size"),
+                                                 volumeOptionsGrid.Column("Price", "Price")
+                                            )
+                                            )
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                @Html.TextBox(property.PropertyName, null,
+                                new { @class = "form-control" })
+                            }
                         </div>
                     }
-                }
-                else if (property.PropertyName == "MilkOptions")
-                {
-                    if (Model.MilkOptions.Count != 0)
-                    {
-                        var volumeOptionsGrid = new WebGrid(Model.MilkOptions, canPage: false);
-                        <div>
-                            @volumeOptionsGrid.GetHtml(tableStyle: "table table-bordered table-responsive table-hover",
-                                columns: volumeOptionsGrid.Columns(
-                                     volumeOptionsGrid.Column("MilkOptionId", "MilkOption Id"),
-                                     volumeOptionsGrid.Column("Size", "Size"),
-                                     volumeOptionsGrid.Column("Price", "Price")
-                                )
-                                )
-                        </div>
-                    }
-                }
-                else
-                {
-                    @Html.TextBox(property.PropertyName, null,
-                    new { @class = "form-control" })
                 }
             </div>
-                }
-            }
-        </div>
-        <div class="panel-footer">
-            <input type="submit" value="Save" class="btn btn-primary" />
-            @Html.ActionLink("Cancel and return to List", "Index", null, new {
-            @class = "btn btn-default"
-            })
-        </div>
-    }
+            <div class="panel-footer">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                @Html.ActionLink("Cancel and return to List", "Index", null, new {
+                @class = "btn btn-default"
+                })
+            </div>
+        }
 </div>
