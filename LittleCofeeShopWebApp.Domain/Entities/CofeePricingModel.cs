@@ -18,11 +18,18 @@ namespace LittleCofeeShopWebApp.Domain.Entities
 
         [HiddenInput(DisplayValue = false)]
         public int CofeeId { get; set; }
+
+        [Required(ErrorMessage = "Please enter a cofee name")]
         public string Name { get; set; }
 
         [DataType(DataType.MultilineText)]
+        [Required(ErrorMessage = "Please enter a description")]
         public string Description { get; set; }
+
+        [Range(0.01, double.MaxValue, ErrorMessage = "Please enter a positive price")]
         public decimal PriceCoeff { get; set; }
+
+        [Required(ErrorMessage = "Please specify an image")]
         public string ImagePath { get; set; }
 
         public virtual ICollection<VolumeOption> VolumeOptions { get; set; }
