@@ -7,6 +7,8 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using LittleCofeeShopWebApp.Infrastructure.Abstract;
+using LittleCofeeShopWebApp.Infrastructure.Concrete;
 
 namespace LittleCofeeShopWebApp.Infrastructure
 {
@@ -34,6 +36,8 @@ namespace LittleCofeeShopWebApp.Infrastructure
                 WriteAsFile = bool.Parse(ConfigurationManager.AppSettings["Email.WriteAsFile"] ?? "false")
             };
             kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>().WithConstructorArgument("settings", emailSettings);
+
+            kernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
         }
     }
 }
