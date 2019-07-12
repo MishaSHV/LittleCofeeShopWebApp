@@ -20,9 +20,15 @@ namespace LittleCofeeShopWebApp.Domain.Concrete
                     .Include("SugarOptions.Unit"); }
         }
 
-        public Cofee DeleteProduct(int productID)
+        public Cofee DeleteProduct(int cofeeId)
         {
-            throw new NotImplementedException();
+            Cofee dbEntry = context.CofeeRecords.Find(cofeeId);
+            if (dbEntry != null)
+            {
+                context.CofeeRecords.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
         }
 
         public void Dispose()
@@ -32,7 +38,22 @@ namespace LittleCofeeShopWebApp.Domain.Concrete
 
         public void SaveProduct(Cofee product)
         {
-            throw new NotImplementedException();
+            if (product.CofeeId == 0)
+            {
+                context.CofeeRecords.Add(product);
+            }
+            else
+            {
+                Cofee dbEntry = context.CofeeRecords.Find(product.CofeeId);
+                if (dbEntry != null)
+                {
+                    dbEntry.Name = product.Name;
+                    dbEntry.Description = product.Description;
+                    dbEntry.PriceCoeff = product.PriceCoeff;
+                    dbEntry.ImagePath = product.ImagePath;
+                }
+            }
+            context.SaveChanges();
         }
     }
 }

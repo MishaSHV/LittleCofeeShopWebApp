@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace LittleCofeeShopWebApp.Domain.Entities
 {
@@ -13,10 +15,21 @@ namespace LittleCofeeShopWebApp.Domain.Entities
             this.MilkOptions = new HashSet<MilkOption>();
             this.SugarOptions = new HashSet<SugarOption>();
         }
+
+        [HiddenInput(DisplayValue = false)]
         public int CofeeId { get; set; }
+
+        [Required(ErrorMessage = "Please enter a cofee name")]
         public string Name { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        [Required(ErrorMessage = "Please enter a description")]
         public string Description { get; set; }
+
+        [Range(0.01, double.MaxValue, ErrorMessage = "Please enter a positive price")]
         public decimal PriceCoeff { get; set; }
+
+        [Required(ErrorMessage = "Please specify an image")]
         public string ImagePath { get; set; }
 
         public virtual ICollection<VolumeOption> VolumeOptions { get; set; }
