@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace LittleCofeeShopWebApp.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private ICofeeRepository repository;
