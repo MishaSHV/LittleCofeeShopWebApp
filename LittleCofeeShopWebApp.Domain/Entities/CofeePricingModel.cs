@@ -32,6 +32,11 @@ namespace LittleCofeeShopWebApp.Domain.Entities
         [Required(ErrorMessage = "Please specify an image")]
         public string ImagePath { get; set; }
 
+        public byte[] ImageData { get; set; }
+
+        [MaxLength(50)]
+        public string ImageMimeType { get; set; }
+
         public virtual ICollection<VolumeOption> VolumeOptions { get; set; }
         public virtual ICollection<MilkOption> MilkOptions { get; set; }
         public virtual ICollection<SugarOption> SugarOptions { get; set; }
